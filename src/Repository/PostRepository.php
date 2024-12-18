@@ -16,6 +16,18 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    //query personzalizado usando dql
+    public function findPost($id){
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT post.id, post.tittle, post.type
+                FROM App\Entity\Post post
+                WHERE post.id = :id
+            ')
+            ->setParameter('id', $id)
+            ->getResult();
+    }
+
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

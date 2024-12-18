@@ -26,9 +26,11 @@ class PostController extends AbstractController
     public function index($id): Response
     {
         //trayendo el post
-        $post = $this->em->getRepository((Post::class))->findAll();
+        $post = $this->em->getRepository((Post::class))->find($id);
+        $custom_post = $this->em->getRepository(Post::class)->findPost($id);
         return $this->render('post/index.html.twig', [
             'post' => $post,
+            'custom_post' => $custom_post
             
         ]);
     }
